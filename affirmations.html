@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Awesomeness | Why Pari Is Awesome</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #f8c8dc; /* Light pink */
+            --secondary: #c8e7f8; /* Light blue */
+            --accent: #f8e4c8; /* Light peach */
+            --text: #5a4a66; /* Muted purple */
+            --light-bg: #faf4f9; /* Very light pink */
+            --shadow: rgba(90, 74, 102, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', 'Comic Sans MS', sans-serif;
+            color: var(--text);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes reveal {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(var(--secondary) 1px, transparent 1px),
+                radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .detective-hat {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px var(--shadow);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        /* Main content */
+        .daily-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .quote-container {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .quote-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px var(--shadow);
+        }
+
+        .quote-container::before {
+            content: """;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 70px;
+            opacity: 0.3;
+        }
+
+        .quote-container::after {
+            content: """;
+            position: absolute;
+            bottom: -30px;
+            right: 10px;
+            font-size: 70px;
+            opacity: 0.3;
+        }
+
+        .daily-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .affirmations-container {
+            margin-top: 40px;
+            min-height: 400px; /* Ensure space for affirmations */
+        }
+
+        .affirmation-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px var(--shadow);
+            border: 2px dashed var(--primary);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: reveal 0.8s ease-out forwards;
+        }
+
+        .affirmation-box:nth-child(odd) {
+            border-color: var(--secondary);
+            background: linear-gradient(to right, white, rgba(200, 231, 248, 0.2));
+        }
+
+        .affirmation-box:nth-child(even) {
+            border-color: var(--primary);
+            background: linear-gradient(to right, white, rgba(248, 200, 220, 0.2));
+        }
+
+        .affirmation-text {
+            font-size: 1.2rem;
+            padding: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reveal-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        .reveal-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 15px var(--shadow);
+            animation: none;
+        }
+
+        .reveal-button:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .reveal-button:disabled {
+            opacity: 0.7;
+            cursor: default;
+            animation: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+            box-shadow: 0 -5px 15px var(--shadow);
+        }
+
+        .made-with-love {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Detective elements */
+        .detective-element {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        #element1 { top: 10%; left: 5%; animation-delay: 0.5s; }
+        #element2 { top: 30%; right: 8%; animation-delay: 1s; }
+        #element3 { bottom: 15%; left: 10%; animation-delay: 1.5s; }
+        #element4 { bottom: 40%; right: 5%; animation-delay: 2s; }
+
+        /* Date display */
+        .today-date {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 2px dashed var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .daily-quote {
+                font-size: 1.2rem;
+            }
+
+            .affirmation-text {
+                font-size: 1.1rem;
+            }
+
+            .reveal-button {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Detective elements -->
+        
+        <header>
+            <span class="detective-hat">🕵️‍♀️</span>
+            <h1>Daily Awesomeness</h1>
+            <p class="subtitle">New evidence of your awesomeness every day!</p>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="affirmations.html">Daily Awesomeness</a>
+                <a href="gallery.html">Photo Evidence</a>
+                <a href="video.html">Video Exhibit</a>
+            </div>
+        </nav>
+
+        <section class="daily-section">
+            <p class="today-date" id="today-date">Today's Date</p>
+            <h2 class="section-title">Today's Inspirational Quote</h2>
+            <div class="quote-container">
+                <p class="daily-quote" id="daily-quote">Loading today's quote...</p>
+                <p class="quote-author" id="quote-author">- Author</p>
+            </div>
+
+            <h2 class="section-title">5 Reasons Why Pari Is Awesome Today</h2>
+            <p>Click the button below to reveal today's reasons!</p>
+            
+            <div class="affirmations-container" id="affirmations-container">
+                <!-- Affirmations will be loaded here -->
+            </div>
+            
+            <button class="reveal-button" id="reveal-button">
+                <i class="fas fa-magic"></i> Reveal Today's Awesomeness!
+            </button>
+        </section>
+    </div>
+
+    <footer>
+        <p>Case File: Why Pari Is Awesome</p>
+        <p class="made-with-love">Made with 💖 for your birthday!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display current date
+            function setCurrentDate() {
+                const today = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('today-date').textContent = today.toLocaleDateString('en-US', options);
+            }
+            
+            // Function to get a random item from an array
+            function getRandomItem(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+            
+            // Function to get random items without repetition
+            function getRandomUniqueItems(arr, count) {
+                const shuffled = [...arr].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+            
+            // Function to get a seed based on the current date
+            function getDateSeed() {
+                const today = new Date();
+                return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+            }
+            
+            // Function to get a pseudo-random number based on seed
+            function seededRandom(seed) {
+                const x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+            
+            // Function to get consistent random items based on date
+            function getDateBasedItems(arr, count, seed) {
+                // Create a new array with indices
+                const indices = Array.from(Array(arr.length).keys());
+                
+                // Shuffle based on seed
+                for (let i = indices.length - 1; i > 0; i--) {
+                    const j = Math.floor(seededRandom(seed + i) * (i + 1));
+                    [indices[i], indices[j]] = [indices[j], indices[i]];
+                }
+                
+                // Get first 'count' items
+                return indices.slice(0, count).map(index => arr[index]);
+            }
+            
+            // Function to set today's quote
+            function setDailyQuote() {
+                const seed = getDateSeed();
+                const quoteIndex = Math.floor(seededRandom(seed) * quotes.length);
+                const quoteObj = quotes[quoteIndex];
+                
+                const quoteElement = document.getElementById('daily-quote');
+                const authorElement = document.getElementById('quote-author');
+                
+                // Fade out
+                quoteElement.style.opacity = 0;
+                authorElement.style.opacity = 0;
+                
+                // After fade out, update content and fade in
+                setTimeout(() => {
+                    quoteElement.textContent = quoteObj.text;
+                    authorElement.textContent = `- ${quoteObj.author}`;
+                    
+                    quoteElement.style.opacity = 1;
+                    authorElement.style.opacity = 1;
+                    
+                    // Add transition for fade effect
+                    quoteElement.style.transition = 'opacity 0.5s ease-in-out';
+                    authorElement.style.transition = 'opacity 0.5s ease-in-out';
+                }, 300);
+            }
+            
+            // Function to create sparkle effect
+            function createSparkles(element) {
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        
+                        // Position relative to the element
+                        const rect = element.getBoundingClientRect();
+                        const top = Math.random() * rect.height;
+                        const left = Math.random() * rect.width;
+                        
+                        sparkle.style.top = `${top}px`;
+                        sparkle.style.left = `${left}px`;
+                        sparkle.style.animation = `sparkle ${0.5 + Math.random() * 0.5}s linear forwards`;
+                        
+                        element.appendChild(sparkle);
+                        
+                        // Remove sparkle after animation
+                        setTimeout(() => {
+                            sparkle.remove();
+                        }, 1000);
+                    }, i * 100);
+                }
+            }
+            
+            // Function to reveal daily affirmations
+            function revealAffirmations() {
+                // Clear previous affirmations
+                const container = document.getElementById('affirmations-container');
+                container.innerHTML = '';
+                
+                // Get 5 date-based affirmations
+                const seed = getDateSeed();
+                const todaysAffirmations = getDateBasedItems(affirmations, 5, seed);
+                
+                // Disable button during animation
+                const button = document.getElementById('reveal-button');
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-hourglass-half"></i> Revealing...';
+                
+                // Create affirmation boxes with delay
+                todaysAffirmations.forEach((affirmation, index) => {
+                    setTimeout(() => {
+                        const box = document.createElement('div');
+                        box.className = 'affirmation-box';
+                        box.style.animationDelay = `${index * 0.2}s`;
+                        
+                        const text = document.createElement('p');
+                        text.className = 'affirmation-text';
+                        text.textContent = `${index + 1}. ${affirmation}`;
+                        
+                        box.appendChild(text);
+                        container.appendChild(box);
+                        
+                        // Add sparkle effect
+                        createSparkles(box);
+                        
+                        // Play a subtle sound if it's the last affirmation
+                        if (index === todaysAffirmations.length - 1) {
+                            setTimeout(() => {
+                                button.disabled = false;
+                                button.innerHTML = '<i class="fas fa-sync-alt"></i> Get New Awesome Reasons!';
+                            }, 800);
+                        }
+                    }, index * 800);
+                });
+            }
+            
+            // Function to check if today's date is different from stored date
+            function isDifferentDay() {
+                const today = new Date().toDateString();
+                const storedDate = localStorage.getItem('kaliAwesomeDate');
+                
+                if (today !== storedDate) {
+                    localStorage.setItem('kaliAwesomeDate', today);
+                    return true;
+                }
+                return false;
+            }
+            
+            // Initialize
+            setCurrentDate();
+            setDailyQuote();
+            
+            // Event listener for the reveal button
+            document.getElementById('reveal-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                revealAffirmations();
+                
+                // Button click effect
+                createSparkles(this);
+            });
+            
+            // If it's a new day or first visit, automatically show new affirmations
+            if (isDifferentDay()) {
+                setTimeout(revealAffirmations, 1000);
+            }
+            
+            // Add mouse follow sparkle effect on button hover
+            const revealButton = document.getElementById('reveal-button');
+            revealButton.addEventListener('mousemove', function(e) {
+                if (this.disabled) return;
+                
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Position relative to the button
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                sparkle.style.top = `${y}px`;
+                sparkle.style.left = `${x}px`;
+                sparkle.style.animation = 'sparkle 0.8s linear forwards';
+                
+                this.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 800);
+            });
+        });
+
+        // Quotes database
+        const quotes = [
+            { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+            { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+            { text: "It is never too late to be what you might have been.", author: "George Eliot" },
+            { text: "Everything you can imagine is real.", author: "Pablo Picasso" },
+            { text: "Happiness is not something ready-made. It comes from your own actions.", author: "Dalai Lama" },
+            { text: "When you have a dream, you've got to grab it and never let go.", author: "Carol Burnett" },
+            { text: "The purpose of our lives is to be happy.", author: "Dalai Lama" },
+            { text: "You are never too small to make a difference.", author: "Greta Thunberg" },
+            { text: "What you seek is seeking you.", author: "Rumi" },
+            { text: "Life isn't about finding yourself. Life is about creating yourself.", author: "George Bernard Shaw" },
+            { text: "The best way to predict your future is to create it.", author: "Abraham Lincoln" },
+            { text: "Be the change that you wish to see in the world.", author: "Mahatma Gandhi" },
+            { text: "In order to be irreplaceable one must always be different.", author: "Coco Chanel" },
+            { text: "Those who dare to fail miserably can achieve greatly.", author: "John F. Kennedy" },
+            { text: "In a gentle way, you can shake the world.", author: "Mahatma Gandhi" },
+            { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+            { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+            { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+            { text: "What lies behind you and what lies in front of you, pales in comparison to what lies inside of you.", author: "Ralph Waldo Emerson" },
+            { text: "Change your thoughts and you change your world.", author: "Norman Vincent Peale" },
+            { text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
+            { text: "You don't have to be perfect to be amazing.", author: "Unknown" },
+            { text: "Every case has a solution if you look at the evidence correctly.", author: "Patrick Jane, The Mentalist" },
+            { text: "The important thing is to never stop questioning.", author: "Albert Einstein" },
+            { text: "The best view comes after the hardest climb.", author: "Unknown" },
+            { text: "Sometimes the questions are complicated and the answers are simple.", author: "Dr. Seuss" },
+            { text: "Focus on the journey, not the destination.", author: "Greg Anderson" },
+            { text: "The mind is not a vessel to be filled, but a fire to be kindled.", author: "Plutarch" },
+            { text: "The details are not the details. They make the design.", author: "Charles Eames" },
+            { text: "Justice is about making them pay. Revenge is making them suffer. Know the difference.", author: "Criminal Minds" }
+        ];
+
+        // Affirmations database
+        const affirmations = [
+            "Your dedication to studying law shows your incredible determination.",
+            "Your passion for crime fiction reveals your analytical and curious mind.",
+            "The way you support your friends through tough times is truly special.",
+            "Your laugh brightens everyone's day and is absolutely contagious.",
+            "Your attention to detail would make even Sherlock Holmes impressed.",
+            "You have an amazing talent for seeing the best in people.",
+            "Your intelligence and wit make conversations with you unforgettable.",
+            "You face challenges with incredible grace and resilience.",
+            "Your kindness to others never goes unnoticed.",
+            "Your creativity in solving problems is truly remarkable.",
+            "The care and thought you put into your friendships is priceless.",
+            "Your sense of humor can turn any bad day into a good one.",
+            "You have the rare ability to make people feel valued and heard.",
+            "Your enthusiasm for learning new things is inspiring.",
+            "You approach life's mysteries with the perfect blend of logic and intuition.",
+            "The way you stand up for what you believe in shows true character.",
+            "Your thoughtfulness makes you an extraordinary friend.",
+            "You have a natural talent for understanding people.",
+            "Your determination to achieve your goals is truly admirable.",
+            "You bring unique perspectives that enrich every conversation.",
+            "Your empathy for others shows the depth of your character.",
+            "Your attention to detail would make you an excellent detective.",
+            "Your ability to remember small details about your friends shows how much you care.",
+            "You have a gift for making people feel comfortable and accepted.",
+            "Your persistence in pursuing your law degree shows incredible strength.",
+            "The way you analyze situations would make Spencer Reid proud.",
+            "Your optimism is a light for everyone around you.",
+            "You have the perfect balance of seriousness and playfulness.",
+            "Your loyalty to your friends is unwavering and precious.",
+            "You ask insightful questions that make people think differently.",
+            "Your ambition and drive inspire everyone who knows you.",
+            "You face obstacles with courage that's truly admirable.",
+            "Your genuine interest in others makes you a wonderful friend.",
+            "You approach problems like a true detective - with patience and intelligence.",
+            "Your smile has the power to brighten anyone's day.",
+            "You always know the right thing to say to make people feel better.",
+            "Your passion for justice will make you an amazing lawyer.",
+            "The way you connect ideas shows remarkable intelligence.",
+            "You're not afraid to stand up for what's right, just like your favorite detectives.",
+            "Your thoughtful analysis of situations shows impressive wisdom.",
+            "You remember important details about your friends, which shows how much you care.",
+            "Your ability to stay focused on your goals is truly inspiring.",
+            "You have an incredible knack for understanding complex legal concepts.",
+            "The way you analyze crime shows demonstrates your brilliant mind.",
+            "Your compassion for others makes the world a better place.",
+            "You approach challenges like a detective solving a case - methodically and brilliantly.",
+            "Your thoughtfulness in maintaining long-distance friendships is special.",
+            "You have a natural talent for making people feel important.",
+            "Your determination to pursue justice aligns perfectly with your career path.",
+            "You notice things others miss, just like your favorite detectives."
+        ];
+    </script>
+</body>
+</html>

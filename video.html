@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Exhibit | Why Pari Is Awesome</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #f8c8dc; /* Light pink */
+            --secondary: #c8e7f8; /* Light blue */
+            --accent: #f8e4c8; /* Light peach */
+            --text: #5a4a66; /* Muted purple */
+            --light-bg: #faf4f9; /* Very light pink */
+            --shadow: rgba(90, 74, 102, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', 'Comic Sans MS', sans-serif;
+            color: var(--text);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(var(--secondary) 1px, transparent 1px),
+                radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .detective-hat {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px var(--shadow);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        /* Video Section */
+        .video-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .video-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 10%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 80%;
+            margin: 0 auto 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .video-frame {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .video-frame video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .control-button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .control-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow);
+        }
+
+        .control-button:active {
+            transform: translateY(1px);
+        }
+
+        .control-button i {
+            font-size: 1.2rem;
+        }
+
+        .mute-button {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+        }
+
+        .custom-video-player {
+            position: relative;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .player-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .custom-video-player:hover .player-overlay {
+            opacity: 1;
+        }
+
+        .play-button-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .play-button-large:hover {
+            transform: scale(1.1);
+            background-color: white;
+        }
+
+        .play-button-large i {
+            font-size: 30px;
+            color: var(--text);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-color: var(--secondary);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+        }
+
+        .placeholder-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: var(--light-bg);
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 5px;
+            transition: width 0.2s ease;
+        }
+
+        /* Case File Preview */
+        .case-file-preview {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            text-align: center;
+            border: 2px dashed var(--primary);
+        }
+
+        .preview-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .preview-text {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .preview-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border: none;
+            border-radius: 50px;
+            color: var(--text);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .preview-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+
+        .made-with-love {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .video-container {
+                width: 95%;
+            }
+        }
+
+        /* Detective elements */
+        .detective-element {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        #element1 { top: 10%; left: 5%; animation-delay: 0.5s; }
+        #element2 { top: 30%; right: 8%; animation-delay: 1s; }
+        #element3 { bottom: 15%; left: 10%; animation-delay: 1.5s; }
+        #element4 { bottom: 40%; right: 5%; animation-delay: 2s; }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        
+
+        <header>
+            <span class="detective-hat">🕵️‍♀️</span>
+            <h1>Video Exhibit</h1>
+            <p class="subtitle">A special birthday message just for you!</p>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="affirmations.html">Daily Awesomeness</a>
+                <a href="gallery.html">Photo Evidence</a>
+                <a href="video.html">Video Exhibit</a>
+                
+            </div>
+        </nav>
+
+        <section class="video-section">
+            <h2 class="section-title">Top Secret Birthday Video</h2>
+            <p class="video-intro">
+                After months of investigation, I've compiled all our evidence into this special video. 
+                                This is classified material - for your eyes only!
+            </p>
+
+            <div class="video-container">
+                <div class="custom-video-player">
+                    <!-- Replace with your actual video file -->
+                    <div class="video-placeholder">
+                        <div class="placeholder-text">
+                            <div class="placeholder-icon">🎬</div>
+                            <h3>Your Birthday Video</h3>
+                            <p>Click to play your special birthday message!</p>
+                        </div>
+                    </div>
+                    <video id="birthday-video" poster="assets/images/thumbnail.jpg" style="display: none;">
+                        <source src="assets/videos/parii_happy_bday.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="player-overlay" id="video-overlay">
+                        <div class="play-button-large">
+                            <i class="fas fa-play" id="play-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="video-progress"></div>
+                </div>
+            </div>
+
+            <div class="video-controls">
+                <button class="control-button" id="play-pause-button">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button class="control-button mute-button" id="mute-button">
+                    <i class="fas fa-volume-up"></i> Unmute
+                </button>
+            </div>
+
+            
+        </section>
+    </div>
+
+    <footer>
+        <p>Case File: Why Pari Is Awesome</p>
+        <p class="made-with-love">Made with 💖 for your birthday!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('birthday-video');
+            const videoPlaceholder = document.querySelector('.video-placeholder');
+            const videoOverlay = document.getElementById('video-overlay');
+            const playPauseButton = document.getElementById('play-pause-button');
+            const playIcon = document.getElementById('play-icon');
+            const muteButton = document.getElementById('mute-button');
+            const progressBar = document.getElementById('video-progress');
+            
+            let isPlaying = false;
+            let isMuted = true; // Start muted
+            
+            // Update video controls
+            function updatePlayPauseButton() {
+                if (isPlaying) {
+                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                    playIcon.className = 'fas fa-pause';
+                } else {
+                    playPauseButton.innerHTML = '<i class="fas fa-play"></i> Play';
+                    playIcon.className = 'fas fa-play';
+                }
+            }
+            
+            function updateMuteButton() {
+                if (isMuted) {
+                    muteButton.innerHTML = '<i class="fas fa-volume-mute"></i> Unmute';
+                    video.muted = true;
+                } else {
+                    muteButton.innerHTML = '<i class="fas fa-volume-up"></i> Mute';
+                    video.muted = false;
+                }
+            }
+            
+            // Function to play video
+            function playVideo() {
+                videoPlaceholder.style.display = 'none';
+                video.style.display = 'block';
+                video.play();
+                isPlaying = true;
+                updatePlayPauseButton();
+            }
+            
+            // Function to pause video
+            function pauseVideo() {
+                video.pause();
+                isPlaying = false;
+                updatePlayPauseButton();
+            }
+            
+            // Toggle play/pause
+            function togglePlayPause() {
+                if (video.paused || video.ended) {
+                    playVideo();
+                } else {
+                    pauseVideo();
+                }
+            }
+            
+            // Toggle mute
+            function toggleMute() {
+                isMuted = !isMuted;
+                updateMuteButton();
+            }
+            
+            // Update progress bar
+            function updateProgress() {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = progress + '%';
+            }
+            
+            // Set up event listeners
+            videoOverlay.addEventListener('click', function() {
+                togglePlayPause();
+            });
+            
+            playPauseButton.addEventListener('click', function() {
+                togglePlayPause();
+            });
+            
+            muteButton.addEventListener('click', function() {
+                toggleMute();
+            });
+            
+            video.addEventListener('timeupdate', function() {
+                updateProgress();
+            });
+            
+            video.addEventListener('ended', function() {
+                isPlaying = false;
+                updatePlayPauseButton();
+            });
+            
+            // Initial setup
+            updateMuteButton();
+            
+            // Add confetti effect when video ends
+            video.addEventListener('ended', function() {
+                // Simple confetti effect
+                createConfetti();
+            });
+            
+            function createConfetti() {
+                const container = document.querySelector('.video-container');
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'absolute';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = getRandomColor();
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+                    confetti.style.opacity = '0.8';
+                    confetti.style.zIndex = '100';
+                    
+                    container.appendChild(confetti);
+                    
+                    // Animate confetti
+                    const fallSpeed = 3 + Math.random() * 5;
+                    const horizontalMovement = -5 + Math.random() * 10;
+                    
+                    let topPosition = -10;
+                    let leftPosition = parseFloat(confetti.style.left);
+                    let rotation = 0;
+                    
+                    const animate = setInterval(function() {
+                        topPosition += fallSpeed;
+                        leftPosition += horizontalMovement / 10;
+                        rotation += 3;
+                        
+                        confetti.style.top = topPosition + 'px';
+                        confetti.style.left = leftPosition + '%';
+                        confetti.style.transform = 'rotate(' + rotation + 'deg)';
+                        
+                        if (topPosition > container.offsetHeight) {
+                            clearInterval(animate);
+                            container.removeChild(confetti);
+                        }
+                    }, 20);
+                }
+            }
+            
+            function getRandomColor() {
+                const colors = [
+                    '#f8c8dc', // Pink
+                    '#c8e7f8', // Blue
+                    '#f8e4c8', // Peach
+                    '#d8f8c8', // Light green
+                    '#e7c8f8'  // Purple
+                ];
+                
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+        });
+    </script>
+</body>
+</html>

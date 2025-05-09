@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Evidence | Why Pari Is Awesome</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #f8c8dc; /* Light pink */
+            --secondary: #c8e7f8; /* Light blue */
+            --accent: #f8e4c8; /* Light peach */
+            --text: #5a4a66; /* Muted purple */
+            --light-bg: #faf4f9; /* Very light pink */
+            --shadow: rgba(90, 74, 102, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', 'Comic Sans MS', sans-serif;
+            color: var(--text);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes flipCard {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+
+        @keyframes flipCardBack {
+            0% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        body {
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(var(--secondary) 1px, transparent 1px),
+                radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .detective-hat {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px var(--shadow);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .gallery-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 10%;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .photo-card {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .photo-caption {
+            transform: translateY(0);
+        }
+
+        .memory-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: var(--primary);
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .photo-card.flipped .memory-text {
+            opacity: 1;
+        }
+
+        .photo-card.flipped img {
+            opacity: 0;
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-lightbox:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav button {
+            background-color: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .lightbox-nav button:hover {
+            background-color: rgba(255,255,255,0.4);
+        }
+
+        .upload-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .instruction-box {
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 2px dashed var(--primary);
+        }
+
+        .instruction-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .instruction-list {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .instruction-list li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+
+        .made-with-love {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        /* Detective elements */
+        .detective-element {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        #element1 { top: 10%; left: 5%; animation-delay: 0.5s; }
+        #element2 { top: 30%; right: 8%; animation-delay: 1s; }
+        #element3 { bottom: 15%; left: 10%; animation-delay: 1.5s; }
+        #element4 { bottom: 40%; right: 5%; animation-delay: 2s; }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+       
+        <header>
+            <span class="detective-hat">🕵️‍♀️</span>
+            <h1>Photo Evidence</h1>
+            <p class="subtitle">Documented proof of our amazing friendship!</p>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="affirmations.html">Daily Awesomeness</a>
+                <a href="gallery.html">Photo Evidence</a>
+                <a href="video.html">Video Exhibit</a>
+            </div>
+        </nav>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Photographic Evidence</h2>
+            <p class="gallery-intro">
+                Every great detective keeps a record of their findings. This gallery contains 
+                photographic evidence of our friendship and the many moments that show just how 
+                awesome you are. Click on any photo to see it in detail, or tap twice to reveal 
+                the special memory associated with it.
+            </p>
+
+            <div class="photo-grid" id="photo-grid">
+                <!-- Photos will be added dynamically -->
+            </div>
+        </section>
+
+        <!-- Lightbox for displaying enlarged photos -->
+        <div class="lightbox" id="lightbox">
+            <span class="close-lightbox" id="close-lightbox">&times;</span>
+            <div class="lightbox-content">
+                <img src="" alt="Enlarged photo" class="lightbox-img" id="lightbox-img">
+                <p class="lightbox-caption" id="lightbox-caption"></p>
+            </div>
+            <div class="lightbox-nav">
+                <button id="prev-photo"><i class="fas fa-chevron-left"></i></button>
+                <button id="next-photo"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Case File: Why Pari Is Awesome</p>
+        <p class="made-with-love">Made with 💖 for your birthday!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Photo gallery data
+            const photoData = [
+                {
+                    id: 1,
+                    src: "assets/images/photo1.jpg",
+                    alt: "School Days",
+                    caption: "Our best days at school together",
+                    memory: "Remember when we first met? We helped each other learn french and we've been friends ever since."
+                },
+                {
+                    id: 2,
+                    src: "assets/images/photo2.jpg",
+                    alt: "Sleepover",
+                    caption: "Late night chats and snacks",
+                    memory: "That time we tried to pull an all-nighter and ended up laughing until 3am instead!"
+                },
+                {
+                    id: 3,
+                    src: "assets/images/photo3.jpg",
+                    alt: "Birthday Party",
+                    caption: "Your birthday celebration",
+                    memory: "Your birthday where we all had crazy fun and your mom made such a pretty cake we felt guilty we had to cut it!"
+                },
+                {
+                    id: 4,
+                    src: "assets/images/photo4.jpg",
+                    alt: "Trip",
+                    caption: "That spontaneous camp/trek trip we took",
+                    memory: "When we got to rock climb, trek, sleep under the stars in a tent with our gang. Too much walking though!"
+                },
+                {
+                    id: 5,
+                    src: "assets/images/photo5.jpg",
+                    alt: "Farewell Party",
+                    caption: "Farewell party for our seniors",
+                    memory: "The day we all worked hard to surprise our seniors one last time. We were so proud of ourselves!"
+                },
+                {
+                    id: 6,
+                    src: "assets/images/photo6.jpg",
+                    alt: "Debate Day",
+                    caption: "The day you rocked the debate",
+                    memory: "You were so nervous but you nailed it! I was so proud of you that day."
+                },
+                {
+                    id: 7,
+                    src: "assets/images/photo7.jpg",
+                    alt: "Coffee Date",
+                    caption: "Coffee and gossip",
+                    memory: "Our ritual of getting together all 7 of us and having fun!"
+                },
+                {
+                    id: 8,
+                    src: "assets/images/photo8.jpg",
+                    alt: "Khushi's Birthday",
+                    caption: "Celebrating Khushi's birthday",
+                    memory: "The day we all dressed up, had cake and champagne for the first time!"
+                }
+            ];
+
+            // Function to create photo cards
+            function createPhotoGallery() {
+                const photoGrid = document.getElementById('photo-grid');
+                
+                photoData.forEach(photo => {
+                    const photoCard = document.createElement('div');
+                    photoCard.className = 'photo-card';
+                    photoCard.dataset.id = photo.id;
+                    
+                    // Use the actual image paths instead of placeholders
+                    photoCard.innerHTML = `
+                        <img src="${photo.src}" alt="${photo.alt}">
+                        <div class="photo-caption">${photo.caption}</div>
+                        <div class="memory-text">${photo.memory}</div>
+                    `;
+                    
+                    photoGrid.appendChild(photoCard);
+                    
+                    // Event listener for clicking on a photo
+                    photoCard.addEventListener('click', function() {
+                        openLightbox(photo.id);
+                    });
+                    
+                    // Double click to flip and show memory
+                    photoCard.addEventListener('dblclick', function() {
+                        this.classList.toggle('flipped');
+                        if (this.classList.contains('flipped')) {
+                            this.style.animation = 'flipCard 0.5s forwards';
+                        } else {
+                            this.style.animation = 'flipCardBack 0.5s forwards';
+                        }
+                    });
+                });
+            }
+            
+            // Lightbox functionality
+            let currentPhotoId = null;
+            
+            function openLightbox(photoId) {
+                currentPhotoId = photoId;
+                const photo = photoData.find(p => p.id === photoId);
+                
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxCaption = document.getElementById('lightbox-caption');
+                
+                // Use actual image paths in lightbox too
+                lightboxImg.src = photo.src;
+                lightboxImg.alt = photo.alt;
+                lightboxCaption.textContent = photo.caption;
+                
+                lightbox.classList.add('active');
+                
+                // Prevent body scrolling when lightbox is open
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function nextPhoto() {
+                let nextId = currentPhotoId + 1;
+                if (nextId > photoData.length) {
+                    nextId = 1;
+                }
+                openLightbox(nextId);
+            }
+            
+            function prevPhoto() {
+                let prevId = currentPhotoId - 1;
+                if (prevId < 1) {
+                    prevId = photoData.length;
+                }
+                openLightbox(prevId);
+            }
+            
+            // Event listeners for lightbox
+            document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+            document.getElementById('next-photo').addEventListener('click', nextPhoto);
+            document.getElementById('prev-photo').addEventListener('click', prevPhoto);
+            
+            // Close lightbox when clicking outside the image
+            document.getElementById('lightbox').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!document.getElementById('lightbox').classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    nextPhoto();
+                } else if (e.key === 'ArrowLeft') {
+                    prevPhoto();
+                }
+            });
+            
+            // Initialize the gallery
+            createPhotoGallery();
+        });
+    </script>
+</body>
+</html>

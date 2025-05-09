@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Pari Is Awesome</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #f8c8dc; /* Light pink */
+            --secondary: #c8e7f8; /* Light blue */
+            --accent: #f8e4c8; /* Light peach */
+            --text: #5a4a66; /* Muted purple */
+            --light-bg: #faf4f9; /* Very light pink */
+            --shadow: rgba(90, 74, 102, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', 'Comic Sans MS', sans-serif;
+            color: var(--text);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(var(--secondary) 1px, transparent 1px),
+                radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .detective-hat {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px var(--shadow);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        /* Main content */
+        .welcome-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: "🔍";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0.5;
+        }
+
+        .welcome-section::after {
+            content: "🔎";
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 24px;
+            opacity: 0.5;
+        }
+
+        .welcome-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .feature-desc {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-button {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 30px;
+            color: var(--text);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .feature-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 10px var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+
+        .made-with-love {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Detective elements */
+        .magnifying-glass {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .clue {
+            position: absolute;
+            font-size: 16px;
+            animation: float 5s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        #clue1 { top: 10%; left: 5%; animation-delay: 0.5s; }
+        #clue2 { top: 30%; right: 8%; animation-delay: 1s; }
+        #clue3 { bottom: 15%; left: 10%; animation-delay: 1.5s; }
+        #clue4 { bottom: 40%; right: 5%; animation-delay: 2s; }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        
+
+        <header>
+            <span class="detective-hat">🕵️‍♀️</span>
+            <h1>Why Pari Is Awesome</h1>
+            <p class="subtitle">Case File #2025: The Mystery of Extraordinary Friendship</p>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="affirmations.html">Daily Awesomeness</a>
+                <a href="gallery.html">Photo Evidence</a>
+                <a href="video.html">Video Exhibit</a>
+                
+            </div>
+        </nav>
+
+        <section class="welcome-section">
+            <h2>CONFIDENTIAL: Top Secret Birthday File</h2>
+            <p class="welcome-message">
+                This website has been created to document the overwhelming evidence 
+                of why Pari is one of the most amazing people on the planet. Through careful investigation 
+                and years of friendship, we've compiled irrefutable proof of her awesomeness. 
+                Explore the site to uncover daily affirmations, memories, and a special birthday message.
+            </p>
+            <p class="welcome-message">
+                Happy Birthday to our favorite future lawyer and crime fiction enthusiast! 
+                Even though we're miles apart, this digital case file will always keep us connected.
+            </p>
+        </section>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🎁</span>
+                <h3 class="feature-title">Daily Awesomeness</h3>
+                <p class="feature-desc">
+                    Every day reveals 5 new reasons why you're amazing, along with a specially selected 
+                    quote to inspire your day!
+                </p>
+                <a href="affirmations.html" class="feature-button">Investigate Daily</a>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">📸</span>
+                <h3 class="feature-title">Photo Evidence</h3>
+                <p class="feature-desc">
+                    A collection of photographic proof documenting our friendship and your 
+                    extraordinary qualities.
+                </p>
+                <a href="gallery.html" class="feature-button">View Gallery</a>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎬</span>
+                <h3 class="feature-title">Video Exhibit</h3>
+                <p class="feature-desc">
+                    A special birthday video message celebrating you and all the memories we've shared.
+                </p>
+                <a href="video.html" class="feature-button">Watch Video</a>
+            </div>
+
+                   </div>
+    </div>
+
+    <footer>
+        <p>Case File: Why Pari Is Awesome</p>
+        <p class="made-with-love">Made with 💖 for your birthday!</p>
+    </footer>
+
+    <script>
+        // Add some floating animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+                card.style.animation = 'fadeIn 0.8s ease-out forwards';
+            });
+        });
+    </script>
+</body>
+</html>
